@@ -1,7 +1,7 @@
 
 const heroBookButton = document.querySelector("#hero_book_btn")
 const ctaBookButton = document.querySelector("#cta_book_btn")
-const contactFormSubmitButton = document.querySelector("#submit-button")
+const contactFormSubmitButton = document.querySelector(".submit-button")
 
 if (heroBookButton) {
     // Make hero button work like the main book now button
@@ -10,7 +10,6 @@ if (heroBookButton) {
         const navBookNowButton = document.querySelector("#book_now_btn")
         navBookNowButton.click();
     });
-
 }
 
 if (ctaBookButton) {
