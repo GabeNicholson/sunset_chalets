@@ -1,3 +1,202 @@
+/* Modern layout system */
+.content-section {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    background-color: #fff;
+}
+
+.section-text {
+    flex: 3;
+    padding: 25px;
+}
+
+.section-image {
+    flex: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background-color: #f5f5f5;
+}
+
+.section-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.section-image:hover img {
+    transform: scale(1.03);
+}
+
+/* Section title styling */
+.section-title {
+    font-size: 1.5rem;
+    color: #0066aa;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #eaeaea;
+}
+
+/* Section description styling */
+.section-desc {
+    line-height: 1.6;
+    color: #444;
+    margin-bottom: 15px;
+}
+
+/* For alternate layouts (image on left) */
+.content-section.alt {
+    flex-direction: row-reverse;
+}
+
+/* Page container */
+.page-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Page header */
+.page-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.page-title {
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.page-subtitle {
+    font-size: 1.2rem;
+    color: #666;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .content-section, .content-section.alt {
+        flex-direction: column;
+    }
+    
+    .section-image {
+        height: 250px;
+    }
+}
+
+/* Enhanced styling for professional look */
+
+/* Subtle animations and transitions */
+.content-section {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.content-section:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Text styling for better readability */
+body {
+    color: #333;
+    line-height: 1.6;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f9f9f9;
+}
+
+/* Add a subtle accent color bar to sections */
+.content-section::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 4px;
+    background: linear-gradient(to bottom, #0066aa, #00aacc);
+    border-radius: 4px 0 0 4px;
+}
+
+.content-section {
+    position: relative;
+    padding-left: 4px;
+}
+
+/* Add activity icons in section headers */
+.section-title {
+    display: flex;
+    align-items: center;
+}
+
+.section-title::before {
+    content: '•';
+    margin-right: 10px;
+    color: #0066aa;
+    font-size: 1.8rem;
+}
+
+/* Improve image handling */
+.section-image {
+    position: relative;
+}
+
+.section-image::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.05), rgba(0,0,0,0.2));
+    pointer-events: none;
+}
+
+/* Call to action button at the bottom of the page */
+.cta-container {
+    text-align: center;
+    margin: 50px 0 30px;
+    padding: 30px;
+    background-color: #f0f8ff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.cta-title {
+    font-size: 1.8rem;
+    color: #0066aa;
+    margin-bottom: 15px;
+}
+
+.cta-text {
+    max-width: 700px;
+    margin: 0 auto 20px;
+    font-size: 1.1rem;
+}
+
+.cta-button {
+    background-color: #ff6b00;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 4px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.cta-button:hover {
+    background-color: #e05f00;
+    transform: scale(1.05);
+}
+
+
 /* Card styling */
 .card {
     background-color: #fff;

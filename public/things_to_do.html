@@ -4,11 +4,12 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ocean Sunset Chalets</title>
-    <link rel="stylesheet" href="style.css?v=1">
+    <title>Things to Do - Ocean Sunset Chalets</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
+    <!-- Navbar (reuse from your existing code) -->
     <nav>
         <div class="nav-container">
             <div class="nav-logo">Ocean Sunset Chalets</div>
@@ -17,100 +18,101 @@
                 <a href="/video-tour">Video Tour</a>
                 <a href="/things_to_do">Things To Do</a>
                 <a href="/dining">Dining</a>
-                <a href="/about">About Us</a>
                 <a href="/contact">Contact Us</a>
             </div>
             <button id="book_now_btn">Book Now</button>
         </div>
     </nav>
 
-    <div class="container">
-        <div class="introTextColumn">
-            <div class="card">
-                <h2 class="card-title">Fox Harb’r Resort & Golf Club</h2>
-                <p>Ocean Sunset Chalets is fortunate to be approximately 30 minutes from Fox Harbor, a luxury community boasting a host of amenities that are accessible to our guests.</p>
-                <p>Activities and services at Fox Harbor include:</p>
+    <div class="page-container">
+        <!-- Page Header -->
+        <div class="page-header">
+            <h1 class="page-title">Things to Do</h1>
+            <p class="page-subtitle">Discover the amazing experiences waiting for you at Ocean Sunset Chalets and the surrounding area.</p>
+        </div>
+
+        <!-- Beach Activities Section -->
+        <div class="content-section">
+            <div class="section-text">
+                <h2 class="section-title">Beach Adventures</h2>
+                <p class="section-desc">Murray Beach offers warm waters and dramatic tides, perfect for beachcombing and relaxation. Stroll out for more than a kilometer at low tide to search for seashells and enjoy the sandbars.</p>
+                <p class="section-desc">The warmest waters north of the Carolinas make this an ideal swimming spot during summer months. Pack a picnic and make a day of it!</p>
+            </div>
+            <div class="section-image">
+                <img src="assets/murray_beach.jpg" alt="Murray Beach at sunset">
+            </div>
+        </div>
+
+        <!-- Outdoor Recreation Section (alternate layout) -->
+        <div class="content-section alt">
+            <div class="section-text">
+                <h2 class="section-title">Outdoor Recreation</h2>
+                <p class="section-desc">Enjoy world-class golf at nearby courses, or try your hand at fishing in the rich waters of the Northumberland Strait. Hiking trails wind through the surrounding countryside, offering stunning views of the landscape.</p>
+                <p class="section-desc">Our property features badminton courts and outdoor games for the whole family. In the evening, gather around our communal bonfire for marshmallow roasting and storytelling under the stars.</p>
+            </div>
+            <div class="section-image">
+                <img src="assets/cabot-cliffs-golf.jpg" alt="Outdoor activities">
+            </div>
+        </div>
+
+        <!-- Local Exploration Section -->
+        <div class="content-section">
+            <div class="section-text">
+                <h2 class="section-title">Local Exploration</h2>
+                <p class="section-desc">Just 15 minutes away, the charming town of Tatamagouche offers boutique shopping, cafés, and local cultural attractions. Visit the Tatamagouche Brewing Company for locally crafted beers or the Train Station Inn for a unique dining experience.</p>
+                <p class="section-desc">Several provincial parks are within easy driving distance, providing opportunities for wildlife viewing and nature photography.</p>
+            </div>
+            <div class="section-image">
+                <img src="assets/caldera_distilling.jpg" alt="Local attractions">
+            </div>
+        </div>
+
+        <!-- Maritime Adventures Section (alternate layout) -->
+        <div class="content-section alt">
+            <div class="section-text">
+                <h2 class="section-title">Maritime Adventures</h2>
+                <p class="section-desc">Set sail on a whale watching tour and observe these magnificent creatures in their natural habitat. From May to October, the waters off Nova Scotia are home to several whale species, including humpbacks and minkes.</p>
+                <p class="section-desc">Fresh seafood is abundant in the region. Visit local fishmongers to purchase the day's catch, or ask us about the best seafood restaurants in the area.</p>
+            </div>
+            <div class="section-image">
+                <img src="assets/whale-watching.jpg" alt="Maritime adventures">
+            </div>
+        </div>
+
+        <!-- Cultural Experiences Section -->
+        <div class="content-section">
+            <div class="section-text">
+                <h2 class="section-title">Cultural Experiences</h2>
+                <p class="section-desc">Nova Scotia's rich heritage comes alive in local museums and cultural centers. Learn about the region's Acadian, Mi'kmaq, and Scottish influences through exhibits, demonstrations, and special events.</p>
+                <p class="section-desc">Don't miss the opportunity to visit nearby wineries, breweries, and distilleries for tastings and tours. The region is becoming known for its quality craft beverages.</p>
+            </div>
+            <div class="section-image">
+                <img src="assets/jost_winery.jpg" alt="Cultural experiences">
+            </div>
+        </div>
+
+        <!-- Add this right before the closing </div> of the page-container -->
+        <div class="cta-container">
+            <h2 class="cta-title">Ready for Your Nova Scotia Adventure?</h2>
+            <p class="cta-text">Whether you're planning a family vacation, romantic getaway, or solo adventure, Ocean Sunset Chalets offers the perfect base for exploring all that Nova Scotia has to offer.</p>
+            <button id="cta_book_btn" class="cta-button">Book Your Stay Now</button>
+        </div>
+
+        <!-- Add this script at the bottom of your page -->
+        <script>
+            // Make the CTA button work like the main book now button
+            document.getElementById('cta_book_btn').addEventListener('click', function() {
+                // You can either trigger the same function as your main book now button
+                document.getElementById('book_now_btn').click();
                 
-                <h4>Golf</h4>
-                <p>Enjoy one of the world’s top courses with an option between Championship Course (ranked #43 in Canada) or Oceanside Par 3 Course.</p>
+                // Or implement specific booking functionality here
+                console.log("CTA Book button clicked");
+            });
+        </script>
 
-                <h4>Dining</h4>
-                <p>Fox Harb'r has a choice between casual and upscale dining. Serving fresh seafood and plenty of other gourmet options.</p>
-
-                <h4>Spa Retreat</h4>
-                <p>The choice is yours: spa treatments, nail services or 5.5 hour packages available.</p>
-
-                <h4>Other Activities</h4>
-                <p>vineyard tours, horseback riding, sport shooting, kayaking, archery and more!</p>
-
-            </div>
-        </div>
-        <div class="pictureColumn">
-            <div class="card">
-                <img src="assets/Fox-Harbr-620x312.jpg" class="responsive-image" alt="fox harbor view">
-            </div>
-            <div class="card">
-                <img src="assets/Golf-620x312.jpg" class="responsive-image" alt="golf view">
-            </div>
-            <div class="card">
-                <img src="assets/Shooting-618x312.jpg" class="responsive-image" alt="shooting view">
-            </div>
-        </div>
     </div>
-    <div class="container">
-        <div class="introTextColumn">
-            <div class="card">
-                <h2 class="card-title">Whale Watching and More Golf</h2>
-                <h4>Cabot Cliffs (Ranked #1 in Canada)</h4>
-                <p>Less than 3 hours away</p>
 
-                <h4>Brule Point Golf</h4>
-                <p>10 minutes away</p>
-
-                <h4>Mount William Golf</h4>
-                <p>35 minutes away</p>
-
-                <h4>A&M Sea Charters</h4>
-                <p>Halifax Tour / Whale Watching</p>
-                <p>87 Government Warf Road</p>
-            </div>
-        </div>
-        <div class="pictureColumn">
-            <div class="card">
-                <img src="assets/cabot-cliffs-golf.jpg" class="responsive-image" alt="fox harbor view">
-            </div>
-            <div class="card">
-                <img src="assets/whale-watching.jpg" class="responsive-image" alt="golf view">
-            </div>
-        </div>
-    </div>
-    <div class="container">
-        <div class="introTextColumn">
-            <div class="card">
-                <h2 class="card-title">Wineries, Breweries & Distilleries</h2>
-                <h4>Jost Winery</h4>
-                <p>15 minutes away</p>
-
-                <h4>Caldera Distillery</h4>
-                <p>7 minutes away</p>
-
-                <h4>Hard Honey Beverage Company</h4>
-                <p>13 minutes away</p>
-
-                <h4>Tatamagouche Brewing Co.</h4>
-                <p>13 minutes away</p>
-            </div>
-        </div>
-        <div class="pictureColumn">
-            <div class="card">
-                <img src="assets/jost_winery.jpg" class="responsive-image" alt="fox harbor view">
-            </div>
-            <div class="card">
-                <img src="assets/caldera_distilling.jpg" class="responsive-image" alt="golf view">
-            </div>
-        </div>
-    </div>
+    <script src="script.js"></script>
 </body>
-
 
 </html>
