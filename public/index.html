@@ -10,55 +10,38 @@
 
 
 <body>
-    <!-- 
-    NAVBAR LINKS!
-    Home
-    Video Tour
-    Things To Do
-    Dining
-    About Us
-    Contact Us 
-    -->
     <nav>
-        <a href="/home">Home</a>
-        <a href="/video-tour">Video Tour</a>
-        <a href="/things_to_do">Things To Do</a>
-        <a href="/dining">Dining</a>
-        <a href="/about">About Us</a>
-        <a href="/contact">Contact Us</a>
+        <div class="nav-container">
+            <div class="nav-logo">Ocean Sunset Chalets</div>
+            <div class="nav-links">
+                <a href="/">Home</a>
+                <a href="/video-tour">Video Tour</a>
+                <a href="/things_to_do">Things To Do</a>
+                <a href="/dining">Dining</a>
+                <a href="/about">About Us</a>
+                <a href="/contact">Contact Us</a>
+            </div>
+            <button id="book_now_btn">Book Now</button>
+        </div>
     </nav>
 
 
-    <button id="book_now_btn">Book Now</button>
+    
 
     <div class="container">
         <div class="introTextColumn">
-            <!-- <div class="introTextColumn"> -->
-            <p>Welcome to Ocean Sunset Chalets, your oasis for authentic, coastal experiences in rural Nova Scotia.
-                Located
-                in
-                Marshville, just a stone’s throw from the Northumberland Strait and Murray Beach, our six,
-                well-appointed
-                chalets offer the very best in East Coast hospitality.</p>
-            <p>Murray Beach, famed for its dramatic ocean tides, boasts the warmest waters north of the Carolinas.
-                Beneath a
-                fiery sunset, stroll out for more than a kilometre and comb the sandbars for seashells. During the day,
-                take
-                relaxing strolls on the beach, explore the surrounding areas , or simply watch the world drift by. Enjoy
-                badminton and other games and roast marshmallows at the bonfire on property.</p>
-            <p>Open all-year round, our chalets are only 1.5-hours from historic Halifax and just 15 minutes from
-                charming
-                Tatamagouche. Beyond the beach, enjoy world-class golf, whale watching, provincial parks, shopping,
-                dining,
-                fishing and fresh seafood, museums and wineries, breweries and distilleries. </p>
-            <p>It’s time for new memories. Whether it is family reunion, wedding and small getaway, contact our team to
-                plan
-                your Nova Scotia escape.</p>
+            <div class="card">
+                <h2 class="card-title">Welcome to Ocean Sunset Chalets</h2>
+                <p>Welcome to Ocean Sunset Chalets, your oasis for authentic, coastal experiences in rural Nova Scotia. Located in Marshville, just a stone's throw from the Northumberland Strait and Murray Beach, our six, well-appointed chalets offer the very best in East Coast hospitality.</p>
+                <p>Murray Beach, famed for its dramatic ocean tides, boasts the warmest waters north of the Carolinas. Beneath a fiery sunset, stroll out for more than a kilometre and comb the sandbars for seashells. During the day, take relaxing strolls on the beach, explore the surrounding areas , or simply watch the world drift by. Enjoy badminton and other games and roast marshmallows at the bonfire on property.</p>
+                <p>Open all-year round, our chalets are only 1.5-hours from historic Halifax and just 15 minutes from charming Tatamagouche. Beyond the beach, enjoy world-class golf, whale watching, provincial parks, shopping, dining, fishing and fresh seafood, museums and wineries, breweries and distilleries.</p>
+                <p>It's time for new memories. Whether it is family reunion, wedding and small getaway, contact our team to plan your Nova Scotia escape.</p>
+            </div>
         </div>
-        <div>
-            <!-- <div class="pictureColumn"> -->
-            <p>SHOULD BE ON A DIFFERENT COLUMN! </p>
-            <img src="assets/grass_view.jpeg">
+        <div class="pictureColumn">
+            <div class="card">
+                <img src="assets/grass_view.jpeg" class="responsive-image" alt="Ocean Sunset Chalets view">
+            </div>
         </div>
     </div>
     <script src="script.js"></script>
