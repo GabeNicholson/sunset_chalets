@@ -1,0 +1,84 @@
+/* ==========================================================================
+   Responsive Adjustments
+   ========================================================================== */
+   @media (max-width: 768px) {
+    /* Navigation responsive */
+    .nav-container {
+      flex-direction: column;
+      padding: 15px;
+    }
+    
+    .nav-logo {
+      margin-bottom: 15px;
+    }
+    
+    .nav-links {
+      flex-direction: column;
+      width: 100%;
+      text-align: center;
+      margin-bottom: 15px;
+    }
+    
+    nav a {
+      padding: 10px;
+      display: block;
+      margin: 5px 0;
+    }
+    
+    nav #book_now_btn {
+      width: 100%;
+    }
+    
+    /* Hero section responsive */
+    .hero-title {
+      font-size: 2.5rem;
+    }
+    
+    .hero-subtitle {
+      font-size: 1.1rem;
+    }
+    
+    .home-section-title {
+      font-size: 2rem;
+    }
+    
+    /* Layout responsive */
+    .container {
+      flex-direction: column;
+    }
+    
+    .introTextColumn, .pictureColumn {
+      width: 100%;
+    }
+    
+    .content-section, .content-section.alt {
+      flex-direction: column;
+    }
+    
+    .section-image {
+      height: 250px;
+    }
+    
+    /* Form responsive */
+    .form-row {
+      flex-direction: column;
+      gap: 20px;
+    }
+    
+    .submit-button {
+      width: 100%;
+    }
+    
+    /* Property page responsive */
+    .photo-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .photo-item {
+      height: 250px;
+    }
+    
+    .feature-item {
+      padding: 20px 15px;
+    }
+  }
