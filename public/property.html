@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Property - Ocean Sunset Chalets</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="navbar-loader.js"></script>
+</head>
+
+<body>
+    <div id="navbar-placeholder"></div>
+
+    <!-- Lightbox Container (Add this to enable image expansion) -->
+    <div class="lightbox" id="imageLightbox">
+        <span class="lightbox-close" id="lightboxClose">&times;</span>
+        <div class="lightbox-content">
+            <img id="lightboxImage" src="" alt="Expanded property image">
+        </div>
+        <div class="lightbox-title" id="lightboxTitle"></div>
+    </div>
+
+    <div class="page-container">
+        <!-- Page Header -->
+        <div class="page-header">
+            <h1 class="page-title">The Property</h1>
+            <p class="page-subtitle">Explore our beautiful chalets and surroundings through photos and video</p>
+        </div>
+
+        <!-- Photo Gallery -->
+        <div class="property-gallery-section">
+            <h2 class="section-title">Photo Gallery</h2>
+            
+            <div class="photo-grid">
+                <div class="photo-item">
+                    <img src="assets/property_1.jpg" alt="Ocean view from the property">
+                </div>
+                <div class="photo-item">
+                    <img src="assets/property_2.jpg" alt="Chalet exterior view">
+                </div>
+                <div class="photo-item">
+                    <img src="assets/property_3.jpg" alt="Chalet interior">
+                </div>
+                <div class="photo-item">
+                    <img src="assets/property_4.jpg" alt="Property grounds">
+                </div>
+            </div>
+        </div>
+    
+        <!-- Additional Features Section -->
+        <div class="property-features-section">
+            <h2 class="section-title">Property Features</h2>
+            <div class="features-list">
+                <div class="feature-item">
+                    <i class="fas fa-home"></i>
+                    <h3>Cozy Chalets</h3>
+                    <p>Six well-appointed wooden chalets with all the comforts of home</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-water"></i>
+                    <h3>Beach Access</h3>
+                    <p>Just steps away from the warm waters of the Northumberland Strait</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-fire"></i>
+                    <h3>Bonfire Area</h3>
+                    <p>Gather around the fire for evening marshmallow roasting</p>
+                </div>
+                <div class="feature-item">
+                    <div class="starlink-icon">
+                        <img src="assets/starlink.svg" alt="Starlink" class="custom-icon">
+                    </div>
+                    <h3>Fast Wifi</h3>
+                    <p>We have full access to Starlink so you can easily work from the chalets</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Video Section -->
+        <div class="property-video-container">
+            <!-- <h2 class="section-title">Video Tour</h2> -->
+            <div class="video-wrapper">
+                <!-- Replace the src with your actual video embed code -->
+                <!-- <iframe src="https://www.youtube.com/embed/your-video-id" title="Ocean Sunset Chalets Video Tour" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
+                <!-- If you want to use a local video file instead, use this: -->
+                <video controls>
+                    <source src="assets/family_video.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <p class="video-description">Take a virtual tour of our chalets and surrounding property. See the beautiful interiors, stunning ocean views, and peaceful environment that awaits you.</p>
+        </div>
+        
+        <!-- Call to Action -->
+        <div class="cta-container">
+            <h2 class="cta-title">Ready to Experience Ocean Sunset Chalets?</h2>
+            <p class="cta-text">Book your stay now and create lasting memories in our beautiful coastal retreat.</p>
+            <button id="cta_book_btn" class="cta-button">Book Your Stay Now</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-about">
+                <div class="footer-logo">
+                    <img src="assets/company_logo.jpg" alt="Ocean Sunset Chalets Logo">
+                    <span>Ocean Sunset Chalets</span>
+                </div>
+                <p>Your coastal retreat in beautiful Nova Scotia, offering authentic experiences and unforgettable memories.</p>
+                <div class="footer-contact">
+                    <p><i class="fas fa-map-marker-alt"></i> 72 Ametview Lane, River John, NS</p>
+                    <p><i class="fas fa-phone"></i> (902) 555-1234</p>
+                    <p><i class="fas fa-envelope"></i> info@oceansunsetchalets.com</p>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/the_property">The Property</a></li>
+                    <li><a href="/things_to_do">Things to Do</a></li>
+                    <li><a href="/dining">Dining</a></li>
+                    <li><a href="/contact_us">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-social">
+                <h3>Follow Us</h3>
+                <div class="footer-social-icons">
+                    <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-pinterest"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Ocean Sunset Chalets. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Make CTA button work like the main book now button
+        document.getElementById('cta_book_btn').addEventListener('click', function() {
+            document.getElementById('book_now_btn').click();
+        });
+
+        // Lightbox functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const lightbox = document.getElementById('imageLightbox');
+            const lightboxImage = document.getElementById('lightboxImage');
+            const lightboxTitle = document.getElementById('lightboxTitle');
+            const lightboxClose = document.getElementById('lightboxClose');
+            const photoItems = document.querySelectorAll('.photo-item');
+            
+            // Open lightbox when clicking on a photo
+            photoItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    const img = this.querySelector('img');
+                    const titleElement = this.querySelector('.photo-title');
+                    const title = titleElement ? titleElement.textContent : img.alt;
+                    
+                    lightboxImage.src = img.src;
+                    lightboxImage.alt = img.alt;
+                    lightboxTitle.textContent = title;
+                    lightbox.classList.add('active');
+                    
+                    // Prevent scrolling on the body when lightbox is open
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+            
+            // Close lightbox when clicking the close button
+            lightboxClose.addEventListener('click', function() {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+            
+            // Close lightbox when clicking outside the image
+            lightbox.addEventListener('click', function(e) {
+                if (e.target === lightbox) {
+                    lightbox.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+            
+            // Close lightbox when pressing Escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+                    lightbox.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

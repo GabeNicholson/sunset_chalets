@@ -11,8 +11,8 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-app.get('/video_tour', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'video_tour.html'));
+app.get('/property', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'property.html'));
 });
 
 app.get('/things_to_do', (req, res) => {
