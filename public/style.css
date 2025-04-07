@@ -1,0 +1,36 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #fffdfd;
+    margin: 0;
+    padding: 20px;
+}
+
+/* Should I name this something like book_now_land_button? */
+#book_now_btn {
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+}
+
+#book_now_btn:hover {
+    background-color: #0056b3;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+}
+
+.introTextColumn {
+    display: flex;
+    margin-top: 20px;
+}
+
+.pictureColumn {
+    display: flex;
+    margin-top: 20px;
+    flex-direction: column;
+}
