@@ -23,7 +23,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
             const navBookNowButton = document.querySelector("#book_now_btn")
             if (navBookNowButton){
-                console.log("nav bar clicked")
                 navBookNowButton.addEventListener("click", () => redirect_to_checkout())
             }
 

@@ -16,15 +16,12 @@ if (heroBookButton) {
 if (ctaBookButton) {
     // Make CTA button work like the main book now button
     ctaBookButton.addEventListener('click', function() {
-        console.log("CALL TO ACTION CLICKED")
         const navBookNowButton = document.querySelector("#book_now_btn")
         navBookNowButton.click();
     });
 }
 
-console.log(contactFormSubmitButton)
 if (contactFormSubmitButton){
-    console.log(contactFormSubmitButton)
     contactFormSubmitButton.addEventListener("click", (event) => {
         event.preventDefault();
         alert('Thank you for your message! We will get back to you soon.');
