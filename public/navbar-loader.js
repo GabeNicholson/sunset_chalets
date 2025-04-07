@@ -62,5 +62,5 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 function redirect_to_checkout() {
-    return window.location.replace("https://oceansunsetchalets.client.innroad.com/")
+    return window.open("https://oceansunsetchalets.client.innroad.com/", "_blank")
 }
