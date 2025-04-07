@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function() {
             console.error('Error loading navbar:', error);
         });
     
-    // Function to highlight the current page in the navbar
+    // Fixed function to highlight the current page in the navbar
     function highlightCurrentPage() {
         const currentPath = window.location.pathname;
         const navLinks = document.querySelectorAll('.nav-links a');
@@ -42,11 +42,22 @@ document.addEventListener('DOMContentLoaded', function() {
         navLinks.forEach(link => {
             const linkPath = link.getAttribute('href');
             
-            // Check if the current path matches the link's href
-            if (currentPath === linkPath || 
-                (currentPath === '/' && linkPath === '/home') ||
-                (currentPath !== '/' && linkPath !== '/home' && currentPath.includes(linkPath))) {
+            // Special case for home page
+            if (currentPath === '/' && (linkPath === '/' || linkPath === '/home')) {
                 link.classList.add('active');
+                return;
+            }
+            
+            // Exact match for other pages
+            if (currentPath === linkPath) {
+                link.classList.add('active');
+                return;
+            }
+            
+            // For pages with trailing slashes
+            if (currentPath === `${linkPath}/` || `${currentPath}/` === linkPath) {
+                link.classList.add('active');
+                return;
             }
         });
     }
