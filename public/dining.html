@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dining - Ocean Sunset Chalets</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <nav>
+        <div class="nav-container">
+            <div class="nav-logo">Ocean Sunset Chalets</div>
+            <div class="nav-links">
+                <a href="/">Home</a>
+                <a href="/video-tour">Video Tour</a>
+                <a href="/things_to_do">Things To Do</a>
+                <a href="/dining">Dining</a>
+                <a href="/contact_us">Contact Us</a>
+            </div>
+            <button id="book_now_btn">Book Now</button>
+        </div>
+    </nav>
+
+    <div class="page-container">
+        <!-- Page Header -->
+        <div class="page-header">
+            <h1 class="page-title">Dining</h1>
+            <p class="page-subtitle">Discover the amazing experiences waiting for you at Ocean Sunset Chalets and the surrounding area.</p>
+        </div>
+
+        <!-- Food Section -->
+        <div class="content-section">
+            <div class="section-text">
+                <h2 class="section-title">Fox Harbor Dining</h2>
+                <p class="section-desc">Their two restaurants (Cape Cliff Dining and The willard) offer a variety of fresh seafood while seated oceanside</p>
+                <p class="section-desc">1337 Fox Harbour Road (902) 257-1801</p>
+            </div>
+            <div class="section-image">
+                <img src="assets/fox_harbor_dining.jpg" alt="Murray Beach at sunset">
+            </div>
+        </div>
+
+        <div class="content-section alt">
+            <div class="section-text">
+                <h2 class="section-title">Chowder House</h2>
+                <p class="section-desc">Many locals and tourists favourite restaurant, highly recommended Seafood Chowder</p>
+                <p class="section-desc">265 Main Street, Tatamagouche (902) 657-2223</p>
+            </div>
+            <div class="section-image">
+                <img src="assets/fox_harbor_dining.jpg" alt="Murray Beach at sunset">
+            </div>
+        </div>
+
+        <div class="content-section">
+            <div class="section-text">
+                <h2 class="section-title">Big Al's Family Restaurant</h2>
+                <p class="section-desc">Options for seafood include haddock, lobster bisque, mussels, chowder etc.</p>
+                <p class="section-desc">Live music on fridays!</p>
+                <p class="section-desc">9 Station Road, Tatamagouche (902) 657-3341</p>
+            </div>
+            <div class="section-image">
+                <img src="assets/fox_harbor_dining.jpg" alt="Murray Beach at sunset">
+            </div>
+        </div>
+
+        <!-- CALL TO ACTION CONTAINER -->
+        <div class="cta-container">
+            <h2 class="cta-title">Ready for Your Nova Scotia Adventure?</h2>
+            <p class="cta-text">Whether you're planning a family vacation, romantic getaway, or solo adventure, Ocean Sunset Chalets offers the perfect base for exploring all that Nova Scotia has to offer.</p>
+            <button id="cta_book_btn" class="cta-button">Book Your Stay Now</button>
+        </div>
+
+        <script>
+            // Make the CTA button work like the main book now button
+            document.getElementById('cta_book_btn').addEventListener('click', function() {
+                // You can either trigger the same function as your main book now button
+                document.getElementById('book_now_btn').click();
+                
+                // Or implement specific booking functionality here
+                console.log("CTA Book button clicked");
+            });
+        </script>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

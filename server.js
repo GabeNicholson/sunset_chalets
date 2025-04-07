@@ -16,6 +16,16 @@ app.get('/things_to_do', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'things_to_do.html'));
 });
 
+
+app.get('/contact_us', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'contact_us.html'));
+});
+
+
+app.get('/dining', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'dining.html'));
+});
+
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
