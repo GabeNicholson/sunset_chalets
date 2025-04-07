@@ -9,7 +9,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const lightboxImage = document.getElementById('lightboxImage');
     const lightboxTitle = document.getElementById('lightboxTitle');
     const lightboxClose = document.getElementById('lightboxClose');
-    const photoItems = document.querySelectorAll('.photo-item');
+
+    // Select all photo items AND the featured photo
+    const photoItems = document.querySelectorAll('.photo-item, .featured-photo');
     
     // Open lightbox when clicking on a photo
     photoItems.forEach(item => {
