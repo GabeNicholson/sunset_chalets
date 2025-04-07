@@ -1,0 +1,23 @@
+{
+    "version": 2,
+    "builds": [
+      {
+        "src": "server.js",
+        "use": "@vercel/node"
+      }
+    ],
+    "routes": [
+      { "src": "/", "dest": "server.js" },
+      { "src": "/property", "dest": "server.js" },
+      { "src": "/things_to_do", "dest": "server.js" },
+      { "src": "/dining", "dest": "server.js" },
+      { "src": "/contact_us", "dest": "server.js" },
+      { "src": "/navbar.html", "dest": "server.js" },
+      { "src": "/footer.html", "dest": "server.js" },
+      { "src": "/css/(.*)", "dest": "/public/css/$1" },
+      { "src": "/assets/(.*)", "dest": "/public/assets/$1" },
+      { "src": "/(.*)\\.js", "dest": "/public/$1.js" },
+      { "src": "/(.*)\\.css", "dest": "/public/$1.css" },
+      { "src": "/(.+)", "dest": "/public/$1" }
+    ]
+  }
