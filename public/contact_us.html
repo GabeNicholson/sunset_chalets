@@ -7,23 +7,11 @@
     <title>Contact Us - Ocean Sunset Chalets</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="navbar-loader.js"></script>
 </head>
 
 <body>
-    <!-- Navbar (assuming you have the same navbar as other pages) -->
-    <nav>
-        <div class="nav-container">
-            <div class="nav-logo">Ocean Sunset Chalets</div>
-            <div class="nav-links">
-                <a href="/">Home</a>
-                <a href="/video-tour">Video Tour</a>
-                <a href="/things_to_do">Things To Do</a>
-                <a href="/dining">Dining</a>
-                <a href="/contact_us">Contact Us</a>
-            </div>
-            <button id="book_now_btn">Book Now</button>
-        </div>
-    </nav>
+    <div id="navbar-placeholder"></div>
 
     <div class="page-container">
         <!-- Page Header -->
@@ -133,12 +121,18 @@
                 </div>
                 
                 <div class="map-container">
-                    
-                    <div class="map-placeholder">
-                        <!-- <i class="fas fa-map"></i> -->
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2784.1358949917008!2d-63.1363845!3d45.748421500000006!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4b5ec079244e5c47%3A0xa3bbeb5405c051ab!2s72%20Ametview%20Ln%2C%20River%20John%2C%20NS%20B0K%201N0%2C%20Canada!5e0!3m2!1sen!2sus!4v1743994236599!5m2!1sen!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                    </div>
+                    <!-- Google Maps embed with proper zoom and styling -->
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2784.1358949917008!2d-63.1363845!3d45.748421500000006!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4b5ec079244e5c47%3A0xa3bbeb5405c051ab!2s72%20Ametview%20Ln%2C%20River%20John%2C%20NS%20B0K%201N0%2C%20Canada!5e0!3m2!1sen!2sus!4v1743994236599!5m2!1sen!2sus"
+                        width="100%" 
+                        height="100%" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
                 </div>
+            </div>
             </div>
         </div>
     </div>
