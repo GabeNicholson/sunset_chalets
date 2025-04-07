@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .then(html => {
             // Insert the navbar at the beginning of the body
-            const navbarPlaceholder = document.getElementById('navbar-placeholder');
+            const navbarPlaceholder = document.querySelector('#navbar-placeholder');
             if (navbarPlaceholder) {
                 navbarPlaceholder.innerHTML = html;
             } else {
@@ -20,15 +20,13 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Add active class to current page link
             highlightCurrentPage();
-            
-            // Ensure the Book Now button still works after being loaded
-            const bookNowBtn = document.getElementById('book_now_btn');
-            if (bookNowBtn) {
-                bookNowBtn.addEventListener('click', function() {
-                    console.log("Book Now button clicked");
-                    // Add your booking functionality here
-                });
+
+            const navBookNowButton = document.querySelector("#book_now_btn")
+            if (navBookNowButton){
+                console.log("nav bar clicked")
+                navBookNowButton.addEventListener("click", () => redirect_to_checkout())
             }
+
         })
         .catch(error => {
             console.error('Error loading navbar:', error);
@@ -62,3 +60,8 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+
+function redirect_to_checkout() {
+    return window.location.replace("https://oceansunsetchalets.client.innroad.com/")
+}
