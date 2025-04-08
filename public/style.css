@@ -34,3 +34,5 @@
 
 /* Animations */
 @import 'css/animations.css';
+
+@import 'css/ios_fixes.css'
