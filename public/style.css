@@ -29,10 +29,10 @@
 /* Footer Styles */
 @import 'css/footer.css';
 
+@import 'css/ios_fixes.css';
+
 /* Responsive Adjustments */
 @import 'css/responsive.css';
 
 /* Animations */
 @import 'css/animations.css';
-
-@import 'css/ios_fixes.css'
