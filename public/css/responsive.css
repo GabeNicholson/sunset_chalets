@@ -8,8 +8,9 @@
       padding: 15px;
     }
     
-    .nav-logo {
-      margin-bottom: 15px;
+    /* Hide logo image on mobile */
+    .nav-logo img {
+      display: none;
     }
     
     .nav-links {
