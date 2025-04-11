@@ -2,6 +2,7 @@
    Base & Typography
    ========================================================================== */
    body {
+    margin: 0;
     font-family: 'Montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: var(--text-dark);
     line-height: 1.8;

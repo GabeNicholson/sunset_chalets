@@ -12,9 +12,9 @@
     cursor: pointer;
     transition: all 0.2s ease;
     align-items: center;
-    gap: 5px;
+    gap: 10px;
   }
-  
+
   .mobile-menu-toggle:hover, 
   .mobile-menu-toggle:focus {
     background-color: rgba(26, 95, 122, 0.15);

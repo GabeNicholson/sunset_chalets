@@ -85,7 +85,9 @@
     background-color: var(--secondary-color);
     color: var(--text-light);
     border: none;
-    padding: 8px 18px;
+    padding: 10px 22px;
+    letter-spacing: 0.5px;
+    font-size: 1.1rem; /* Increased font size */
     border-radius: 30px;
     font-weight: 600;
     cursor: pointer;

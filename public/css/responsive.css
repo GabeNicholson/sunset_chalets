@@ -2,18 +2,22 @@
    Responsive Adjustments
    ========================================================================== */
    @media (max-width: 768px) {
-    /* Navigation responsive - UPDATED to keep logo and menu on same row */
     .nav-container {
+      justify-content: space-evenly;
       flex-direction: row; /* Changed from column to row */
-      padding: 15px;
-      justify-content: flex-start; /* Align items to the start instead of space-between */
-      align-items: center; /* Center items vertically */
-      flex-wrap: wrap; /* Allow wrapping for the nav links */
+      padding: 5px;
+      width: 100%;
+      align-items: center; 
+      flex-wrap: wrap; 
     }
     
     /* Keep logo visible but without image */
     .nav-logo {
       font-size: 1.2rem; /* Slightly smaller font size */
+      width: auto; /* Allow the logo to shrink */
+      max-width: 100%;
+      padding-left: 0; 
+      margin-left: 0; 
     }
     
     .nav-logo img {
