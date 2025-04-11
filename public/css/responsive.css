@@ -2,22 +2,31 @@
    Responsive Adjustments
    ========================================================================== */
    @media (max-width: 768px) {
-    /* Navigation responsive */
+    /* Navigation responsive - UPDATED to keep logo and menu on same row */
     .nav-container {
-      flex-direction: column;
+      flex-direction: row; /* Changed from column to row */
       padding: 15px;
+      justify-content: flex-start; /* Align items to the start instead of space-between */
+      align-items: center; /* Center items vertically */
+      flex-wrap: wrap; /* Allow wrapping for the nav links */
     }
     
-    /* Hide logo image on mobile */
+    /* Keep logo visible but without image */
+    .nav-logo {
+      font-size: 1.2rem; /* Slightly smaller font size */
+    }
+    
     .nav-logo img {
       display: none;
     }
     
+    /* Menu toggle and nav links styling */
     .nav-links {
       flex-direction: column;
       width: 100%;
       text-align: center;
-      margin-bottom: 15px;
+      margin-top: 15px; /* Space between logo/toggle row and links */
+      order: 3; /* Push links below the logo and toggle */
     }
     
     nav a {
@@ -28,6 +37,8 @@
     
     nav #book_now_btn {
       width: 100%;
+      order: 4; /* Push button below links */
+      margin-top: 10px;
     }
     
     /* Hero section responsive */

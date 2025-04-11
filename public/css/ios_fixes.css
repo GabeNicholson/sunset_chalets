@@ -42,25 +42,24 @@
     /* Show the toggle button on mobile */
     .mobile-menu-toggle {
       display: flex;
-      margin-right: 0;
+      margin-left: 15px; /* Add a specific margin instead of auto */
     }
-
-    .page-title {
-        font-size: 2.5rem;
-        color: var(--primary-color);
-        margin-bottom: 10px;
-        padding-top: 30px;
-      }
     
     /* Make sure the nav links are hidden by default */
     .nav-links, 
     nav #book_now_btn:not(.mobile-menu-toggle) {
       display: none !important; /* Use !important to override any conflicts */
+      width: 100%; /* Full width when displayed */
     }
     
     /* Only show nav links and book button when menu is expanded */
     nav.menu-expanded .nav-links,
     nav.menu-expanded #book_now_btn:not(.mobile-menu-toggle) {
       display: block !important;
+    }
+    
+    /* Full width for nav-container children when expanded */
+    nav.menu-expanded .nav-container {
+      flex-wrap: wrap;
     }
 }
