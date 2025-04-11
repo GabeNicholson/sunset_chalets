@@ -44,6 +44,13 @@
       display: flex;
       margin-right: 0;
     }
+
+    .page-title {
+        font-size: 2.5rem;
+        color: var(--primary-color);
+        margin-bottom: 10px;
+        padding-top: 30px;
+      }
     
     /* Make sure the nav links are hidden by default */
     .nav-links, 
