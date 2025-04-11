@@ -1,138 +1,58 @@
-/* Mobile Menu Toggle and iOS specific fixes */
+/* Enhanced Mobile Menu Button Styles */
 
-/* Mobile Menu Toggle Styling */
+/* Improved mobile menu toggle appearance */
 .mobile-menu-toggle {
     display: none;
-    cursor: pointer;
-    font-size: 1.8rem;
+    font-size: 1.2rem;
     color: var(--primary-color);
-    background: none;
-    border: none;
-    padding: 5px 10px;
-    margin: 0;
-    position: absolute;
-    right: 15px;
-    top: 15px;
-    -webkit-appearance: none;
-    appearance: none;
-    z-index: 1001; /* Ensure it's above other elements */
+    background-color: rgba(26, 95, 122, 0.08);
+    border: 1px solid rgba(26, 95, 122, 0.2);
+    border-radius: 6px;
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  .mobile-menu-toggle:hover, 
+  .mobile-menu-toggle:focus {
+    background-color: rgba(26, 95, 122, 0.15);
+  }
+  
+  /* Add text to the toggle button */
+  .mobile-menu-toggle::after {
+    content: "Menu";
+    font-size: 1rem;
+    font-weight: 500;
+  }
+  
+  /* Active state for the toggle */
+  nav.menu-expanded .mobile-menu-toggle {
+    background-color: var(--primary-color);
+    color: white;
+  }
+  
+  nav.menu-expanded .mobile-menu-toggle::after {
+    content: "Close";
   }
   
   /* Mobile styles */
   @media (max-width: 768px) {
-    /* Show mobile menu toggle */
+    /* Show the toggle button on mobile */
     .mobile-menu-toggle {
-      display: block;
-    }
-    
-    /* Prevent content shift when scrolling on iOS */
-    html, body {
-      -webkit-overflow-scrolling: touch;
-      height: 100%;
-    }
-    
-    /* Keep navbar fixed but make it more compact */
-    nav {
-      /* Keep fixed position to ensure it stays at top */
-      padding: 5px 0;
-      height: auto;
-      max-height: 100vh;
-      transition: max-height 0.3s ease;
-      overflow: hidden;
-    }
-    
-    /* Ensure nav is visible */
-    nav {
-      display: block !important;
-      visibility: visible !important;
-      opacity: 1 !important;
-    }
-    
-    .nav-container {
-      padding: 10px 15px;
-      justify-content: flex-start;
-      align-items: center;
-      flex-wrap: wrap;
-      position: relative; /* Add this to position the hamburger icon properly */
-    }
-    
-    /* Make logo smaller */
-    .nav-logo {
-      font-size: 1.2rem;
-      margin-right: 60px; /* Make space for the menu button */
-      max-width: 70%; /* Ensure logo doesn't push toggle off screen */
-    }
-    
-    .nav-logo img {
-      height: 40px;
-      width: auto;
-    }
-    
-    /* By default on mobile, hide the nav links but maintain layout */
-    .nav-links {
-      display: none;
-      width: 100%;
-      flex-direction: column;
-      margin: 10px 0 0;
-      padding-bottom: 10px;
-    }
-    
-    /* Show nav links when menu is expanded */
-    nav.menu-expanded .nav-links {
       display: flex;
+      margin-right: 0;
     }
     
-    /* Links styling */
-    nav a {
-      padding: 12px 15px;
-      display: block;
-      margin: 5px 0;
-      text-align: center;
-      border-radius: 6px;
+    /* Make sure the nav links are hidden by default */
+    .nav-links, 
+    nav #book_now_btn:not(.mobile-menu-toggle) {
+      display: none !important; /* Use !important to override any conflicts */
     }
     
-    /* Book now button */
-    nav #book_now_btn {
-      width: 100%;
-      margin-top: 10px;
-      padding: 12px;
-      font-size: 1.1rem;
+    /* Only show nav links and book button when menu is expanded */
+    nav.menu-expanded .nav-links,
+    nav.menu-expanded #book_now_btn:not(.mobile-menu-toggle) {
+      display: block !important;
     }
-    
-    /* Add extra space below navbar for content */
-    .page-container, .hero-section {
-      margin-top: 70px !important;
-    }
-    
-    /* iOS specific fix for fixed positioning */
-    @supports (-webkit-touch-callout: none) {
-      nav {
-        position: fixed;
-        width: 100%;
-        -webkit-transform: translateZ(0);
-        transform: translateZ(0);
-      }
-      
-      /* Ensure navbar is visible */
-      nav {
-        opacity: 1 !important;
-        visibility: visible !important;
-      }
-      
-      /* Ensure hamburger menu is tappable */
-      .mobile-menu-toggle {
-        -webkit-transform: translateZ(0);
-        transform: translateZ(0);
-        position: absolute;
-        right: 15px;
-        top: 15px;
-        z-index: 1001;
-        width: 44px; /* Minimum touch target size */
-        height: 44px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 2rem;
-      }
-    }
-  }
