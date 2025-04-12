@@ -99,3 +99,83 @@
     border: none;
     display: block;
   }
+
+
+  /* Success message styling - add to your forms.css or contact.css */
+.success-message-container {
+  background-color: white;
+  border-radius: 10px;
+  padding: 40px 30px;
+  text-align: center;
+  animation: fadeIn 0.5s ease;
+  border-top: 3px solid var(--accent-color);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.success-icon {
+  font-size: 4rem;
+  color: var(--accent-color);
+  margin-bottom: 20px;
+}
+
+.success-title {
+  color: var(--primary-color);
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+}
+
+.success-text {
+  color: #444;
+  font-size: 1.1rem;
+  max-width: 600px;
+  margin: 0 auto 15px;
+  line-height: 1.6;
+}
+
+.success-contact {
+  color: #666;
+  margin-bottom: 30px;
+}
+
+#newMessageBtn {
+  background-color: var(--primary-color);
+  margin-top: 10px;
+  transition: all 0.3s ease;
+}
+
+#newMessageBtn:hover {
+  background-color: var(--secondary-color);
+  transform: translateY(-3px);
+}
+
+/* Add this keyframe animation if you don't already have it */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Error message styling - add to your forms.css */
+.form-error-message {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  background-color: #feecec;
+  border-left: 4px solid #e74c3c;
+  padding: 15px 20px;
+  border-radius: 6px;
+  margin-bottom: 25px;
+  animation: slideDown 0.4s ease;
+  color: #c0392b;
+  font-weight: 500;
+}
+
+.form-error-message::before {
+  content: "⚠";
+  font-size: 1.2rem;
+}
