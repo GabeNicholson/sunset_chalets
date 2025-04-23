@@ -10,6 +10,11 @@ if (heroBookButton) {
         event.preventDefault();
         const navBookNowButton = document.querySelector("#book_now_btn")
         navBookNowButton.click();
+
+        // Add this line for analytics tracking
+        if (window.OceanSunsetAnalytics) {
+            window.OceanSunsetAnalytics.trackBookNow('hero_book_btn');
+        }
     });
 }
 
@@ -18,6 +23,10 @@ if (ctaBookButton) {
     ctaBookButton.addEventListener('click', function() {
         const navBookNowButton = document.querySelector("#book_now_btn")
         navBookNowButton.click();
+
+        if (window.OceanSunsetAnalytics) {
+            window.OceanSunsetAnalytics.trackBookNow('cta_book_btn');
+        }
     });
 }
 
@@ -58,6 +67,12 @@ if (contactForm && contactFormSubmitButton) {
         sendContactRequest(formDataObj)
             .then((response) => {
                 if (response.success) {
+
+                    // Track successful submission
+                    if (window.OceanSunsetAnalytics) {
+                        window.OceanSunsetAnalytics.trackContactSubmission(formDataObj);
+                    }
+
                     // Hide the form and show success message
                     contactForm.style.display = 'none';
                     successMessage.style.display = 'block';
@@ -102,6 +117,7 @@ function showErrorMessage(message) {
 }
 
 // Reset form button
+const newMessageBtn = document.getElementById('newMessageBtn');
 if (newMessageBtn) {
     newMessageBtn.addEventListener('click', () => {
         // Hide success message and show form again
