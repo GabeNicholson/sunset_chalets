@@ -30,14 +30,17 @@ document.addEventListener('DOMContentLoaded', function() {
             // Add event listener to book now button
             const navBookNowButton = document.querySelector("#book_now_btn")
             if (navBookNowButton){
-                navBookNowButton.addEventListener("click", () => redirect_to_checkout());
-                console.log('Added event listener to book now button');
+                navBookNowButton.addEventListener("click", () => {
+                    if (window.OceanSunsetAnalytics) {
+                        window.OceanSunsetAnalytics.trackBookNow();
+                    }
+                    redirect_to_checkout()
+                });
             }
 
             // Dispatch an event indicating the navbar has been loaded
             const navbarLoadedEvent = new CustomEvent('navbarLoaded');
             document.dispatchEvent(navbarLoadedEvent);
-            console.log('Dispatched navbarLoaded event');
         })
         .catch(error => {
             console.error('Error loading navbar:', error);

@@ -13,7 +13,7 @@ if (heroBookButton) {
 
         // Add this line for analytics tracking
         if (window.OceanSunsetAnalytics) {
-            window.OceanSunsetAnalytics.trackBookNow('hero_book_btn');
+            window.OceanSunsetAnalytics.trackBookNow();
         }
     });
 }
@@ -25,7 +25,7 @@ if (ctaBookButton) {
         navBookNowButton.click();
 
         if (window.OceanSunsetAnalytics) {
-            window.OceanSunsetAnalytics.trackBookNow('cta_book_btn');
+            window.OceanSunsetAnalytics.trackBookNow();
         }
     });
 }

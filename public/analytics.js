@@ -243,6 +243,7 @@ class Analytics {
         
         // Get server-side info (IP address)
         const serverInfo = await this._getServerSideInfo();
+        console.log(`serverInfo: ${serverInfo}`)
 
         const payload = {
           visit_id: visitId,
@@ -605,10 +606,8 @@ class Analytics {
     }
   }
   
-  // PUBLIC METHODS
-  
   // Track booking actions
-  async trackBookNow(elementId) {
+  async trackBookNow() {
     return this._ensureInitialized(async () => {
       try {
         await supabase.from('book_now_actions').insert({

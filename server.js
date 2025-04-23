@@ -78,9 +78,7 @@ app.post('/api/contact', (req, res) => {
 
 // IP address capture middleware
 app.use((req, res, next) => {
-    req.clientIP = req.headers['x-forwarded-for']?.split(',')[0] || 
-                  req.headers['x-real-ip'] || 
-                  req.connection.remoteAddress;
+    req.clientIP = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
     next();
   });
   
