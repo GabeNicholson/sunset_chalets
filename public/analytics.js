@@ -58,7 +58,7 @@ class Analytics {
       console.log('Visit established:', this.visitId);
       
       // Add a small delay to ensure database consistency
-      await new Promise(resolve => setTimeout(resolve, 300));
+      await new Promise(resolve => setTimeout(resolve, 100));
       
       // Step 3: Track the page view
       await this._trackPageView();
@@ -616,7 +616,6 @@ class Analytics {
           visit_id: this.visitId,
           action_timestamp: new Date().toISOString(),
           page_url: window.location.href,
-          element_id: elementId
         });
       } catch (error) {
         console.error('Error tracking booking action:', error);
@@ -634,8 +633,7 @@ class Analytics {
           submission_timestamp: new Date().toISOString(),
           name: formData.name,
           email: formData.email,
-          phone: formData.phone || null,
-          request_type: formData.requestType || null
+          phone: formData.phone || null
         });
       } catch (error) {
         console.error('Error tracking contact submission:', error);
