@@ -448,12 +448,18 @@ class Analytics {
   // Get server-side info (IP address)
   async _getServerSideInfo() {
     try {
+      // Simplify the fetch request
       const response = await fetch('/api/analytics/client-info');
-      if (!response.ok) throw new Error('Failed to get client info');
+      
+      if (!response.ok) {
+        throw new Error(`HTTP error ${response.status}`);
+      }
+      
       return await response.json();
     } catch (error) {
       console.error('Error getting client info:', error);
-      return { ip: null };
+      // Return a valid object structure even on error
+      return { ip: null, timestamp: new Date().toISOString() };
     }
   }
   
@@ -636,24 +642,6 @@ class Analytics {
         });
       } catch (error) {
         console.error('Error tracking contact submission:', error);
-      }
-    });
-  }
-  
-  // Generic event tracking method
-  async trackEvent(eventName, eventData = {}) {
-    return this._ensureInitialized(async () => {
-      try {
-        await supabase.from('custom_events').insert({
-          session_id: this.sessionId,
-          visit_id: this.visitId,
-          event_timestamp: new Date().toISOString(),
-          event_name: eventName,
-          event_data: eventData,
-          page_url: window.location.href
-        });
-      } catch (error) {
-        console.error(`Error tracking event ${eventName}:`, error);
       }
     });
   }

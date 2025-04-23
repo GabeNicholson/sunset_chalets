@@ -1,10 +1,10 @@
 require('dotenv').config();
+
 const express = require('express');
 const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3000;
 const nodemailer = require('nodemailer');
-const { Socket } = require('net');
 
 // Serve static files from the "public" directory
 app.use(express.static(path.join(__dirname, 'public')));
@@ -75,20 +75,18 @@ app.post('/api/contact', (req, res) => {
         res.status(200).json({ success: true, message: 'Email sent successfully' });
     });
 });
-
-// IP address capture middleware
-app.use((req, res, next) => {
-    req.clientIP = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
-    next();
-  });
   
-  // Add a route to provide client IP address
-  app.get('/api/analytics/client-info', (req, res) => {
+app.get('/api/analytics/client-info', (req, res) => {
+    const ip = req.headers['x-forwarded-for']?.split(',')[0]?.trim() || 
+                req.socket?.remoteAddress ||
+                null;
+    console.log('Client IP detected:', ip);
+
     res.json({ 
-      ip: req.clientIP,
-      timestamp: new Date().toISOString()
-    });
-  });
+        ip: ip,
+        timestamp: new Date().toISOString()
+        });
+});
 
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
