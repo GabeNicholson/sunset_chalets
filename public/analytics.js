@@ -119,86 +119,38 @@ class Analytics {
       // Create new session in database BEFORE setting cookies
       try {
         const timestamp = new Date().toISOString();
-        const { data, error } = await supabase.from('user_sessions').insert({
+        const payload = {
           session_id: sessionId,
           first_seen_timestamp: timestamp,
           last_seen_timestamp: timestamp
-        }).select();
-        
-        if (error) {
-          console.error('Error creating session:', error);
-          // Try a simpler insert with just the essential fields
-          const { retryError } = await supabase.from('user_sessions').insert({
-            session_id: sessionId,
-            first_seen_timestamp: timestamp
-          });
-          
-          if (retryError) {
-            console.error('Retry error creating session:', retryError);
-            // Generate a new session ID as a last resort
-            sessionId = generateUUID();
-            const { lastError } = await supabase.from('user_sessions').insert({
-              session_id: sessionId,
-              first_seen_timestamp: new Date().toISOString()
-            });
-            
-            if (lastError) {
-              console.error('Final attempt to create session failed:', lastError);
-            }
-          }
         }
-        
+        const response = await fetch('/api/analytics/user_session', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        console.log(`user_session insert response: ${response}`)
+
         // Only set cookie after successful database operation
         setCookie('session_id', sessionId, 365); // 1 year
         console.log('New session created:', sessionId);
       } catch (error) {
         console.error('Error creating session:', error);
-        // Still set cookie even if DB operation fails
-        setCookie('session_id', sessionId, 365);
       }
     } else {
       // For existing sessions, verify they exist in the database
-      try {
-        const { data, error } = await supabase
-          .from('user_sessions')
-          .select('session_id')
-          .eq('session_id', sessionId)
-          .maybeSingle();
-          
-        if (error || !data) {
-          console.warn('Existing session ID not found in database:', sessionId);
-          
-          // Create the session in the database
-          const timestamp = new Date().toISOString();
-          await supabase.from('user_sessions').insert({
-            session_id: sessionId,
-            first_seen_timestamp: timestamp,
-            last_seen_timestamp: timestamp
-          });
-        } else {
-          // Update last seen timestamp in the background for valid sessions
-          this._updateSessionLastSeen(sessionId).catch(err => 
-            console.error('Error updating session last seen:', err)
-          );
-        }
-      } catch (error) {
-        console.error('Error verifying session:', error);
-        // Continue with existing session ID despite the error
-      }
-    }
-    
-    return sessionId;
-  }
-  
-  // Update session last seen timestamp
-  async _updateSessionLastSeen(sessionId) {
-    try {
-      await supabase.from('user_sessions').update({
+      const payload = {
+        session_id: sessionId,
         last_seen_timestamp: new Date().toISOString()
-      }).eq('session_id', sessionId || this.sessionId);
-    } catch (error) {
-      console.error('Error updating session last seen:', error);
+      }
+      const response = await fetch('/api/analytics/update_user_session', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      console.log(`user_session insert response: ${response}`) 
     }
+    return sessionId;
   }
   
   // STEP 2: Ensure visit is created and tracked
@@ -264,77 +216,38 @@ class Analytics {
           screen_height: window.innerHeight
         };
 
-        // Insert visit record
-        const { data, error } = await supabase.from('site_visits').insert(payload).select();
-        
-        if (error) {
-          console.error('Error creating visit:', error);
-          
-          // If there's a foreign key violation, ensure the session exists
-          if (error.code === '23503' && error.message.includes('session_id')) {
-            // Try to fix by re-creating the session
-            await this._ensureSession();
-            
-            // Retry the visit creation with the updated session ID
-            payload.session_id = this.sessionId;
-            const { retryData, retryError } = await supabase.from('site_visits').insert(payload).select();
-            
-            if (retryError) {
-              console.error('Retry error creating visit:', retryError);
-              // If retry fails, generate a fallback visit ID
-              visitId = null;
-            } else {
-              // Only set cookies if visit was successfully created
-              setCookie('current_visit', visitId, 1); // 1 day
-              setCookie('last_activity', new Date().toISOString(), 1);
-            }
-          } else {
-            // For other errors, do not set cookies yet
-            visitId = null;
-          }
-        } else {
-          // Only set cookies if visit was successfully created
-          setCookie('current_visit', visitId, 1); // 1 day
-          setCookie('last_activity', new Date().toISOString(), 1);
-        }
+        const response = await fetch('/api/analytics/pageview', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        console.log(`response: ${response}`)
+        // Only set cookies if visit was successfully created
+        setCookie('current_visit', visitId, 1); // 1 day
+        setCookie('last_activity', new Date().toISOString(), 1);
       } catch (error) {
         console.error('Error creating visit:', error);
         visitId = null;
       }
     } else {
       // For existing visit IDs, verify they exist in the database
-      try {
-        const { data, error } = await supabase
-          .from('site_visits')
-          .select('visit_id')
-          .eq('visit_id', visitId)
-          .maybeSingle();
-          
-        if (error || !data) {
-          console.error('Existing visit ID not found in database:', visitId);
-          // Clear the cookie and create a new visit
-          visitId = null;
-          setCookie('current_visit', '', -1); // Expire the cookie
-          return this._ensureVisit(); // Recursive call to create a new visit
-        } else {
-          // Update last activity time for valid visits
-          setCookie('last_activity', new Date().toISOString(), 1);
-        }
-      } catch (error) {
-        console.error('Error verifying visit:', error);
-        // Continue with the existing visit ID despite the error
+      const { data, error } = await supabase
+        .from('site_visits')
+        .select('visit_id')
+        .eq('visit_id', visitId)
+        .maybeSingle();
+        
+      if (error || !data) {
+        console.error('Existing visit ID not found in database:', visitId);
+        // Clear the cookie and create a new visit
+        visitId = null;
+        setCookie('current_visit', '', -1); // Expire the cookie
+        return this._ensureVisit(); // Recursive call to create a new visit
+      } else {
+        // Update last activity time for valid visits
+        setCookie('last_activity', new Date().toISOString(), 1);
       }
     }
-    
-    // If we couldn't create or verify a visit, create a temporary one just for this pageview
-    // This ensures we don't break the flow even if database operations fail
-    if (!visitId) {
-      console.warn('Creating temporary visit ID for this page view only');
-      visitId = generateUUID();
-      // Don't set cookies for temporary IDs
-    }
-    
-    return visitId;
   }
   
   // STEP 3: Track a page view
@@ -434,11 +347,17 @@ class Analytics {
       
       // Only update if we have a valid page view ID
       if (this.pageViewId) {
-        await supabase.from('page_views').update({
+        const payload = {
+          page_view_id: this.pageViewId,
           exit_timestamp: exitTime.toISOString(),
           time_on_page: timeOnPage,
           scroll_depth_percentage: this.maxScrollDepth
-        }).eq('page_view_id', this.pageViewId);
+        }
+        const response = await fetch('/api/analytics/update_pageview', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
       }
     } catch (error) {
       console.error('Error updating page view:', error);
@@ -566,28 +485,7 @@ class Analytics {
           this._capturePerformanceMetrics();
         }, 0);
       }
-    });
-    
-    // Error tracking with better async handling
-    window.addEventListener('error', (event) => {
-      const { message, filename, lineno, colno, error } = event;
-      
-      // Use _ensureInitialized to make sure we have valid session and visit IDs
-      this._ensureInitialized(async () => {
-        try {
-          await supabase.from('error_events').insert({
-            session_id: this.sessionId,
-            visit_id: this.visitId,
-            error_timestamp: new Date().toISOString(),
-            error_message: message,
-            error_stack: error?.stack || '',
-            page_url: window.location.href
-          });
-        } catch (err) {
-          console.error('Failed to log error event:', err);
-        }
-      });
-    });
+    }); 
   }
   
   // Capture page performance metrics
@@ -616,11 +514,16 @@ class Analytics {
   async trackBookNow() {
     return this._ensureInitialized(async () => {
       try {
-        await supabase.from('book_now_actions').insert({
+        const payload = {
           session_id: this.sessionId,
           visit_id: this.visitId,
           action_timestamp: new Date().toISOString(),
           page_url: window.location.href,
+        }
+        await fetch('/api/analytics/track_book_now', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
         });
       } catch (error) {
         console.error('Error tracking booking action:', error);
@@ -632,13 +535,19 @@ class Analytics {
   async trackContactSubmission(formData) {
     return this._ensureInitialized(async () => {
       try {
-        await supabase.from('contact_submissions').insert({
+        const payload = {
           session_id: this.sessionId,
           visit_id: this.visitId,
           submission_timestamp: new Date().toISOString(),
           name: formData.name,
           email: formData.email,
           phone: formData.phone || null
+        }
+
+        await fetch('/api/analytics/track_contact_submission', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
         });
       } catch (error) {
         console.error('Error tracking contact submission:', error);

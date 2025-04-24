@@ -6,11 +6,15 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const nodemailer = require('nodemailer');
 
+const analyticsRoutes = require('./routes/analyticsRoutes');
+
 // Serve static files from the "public" directory
 app.use(express.static(path.join(__dirname, 'public')));
 // Middleware to parse JSON and form data
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+app.use('/api/analytics', analyticsRoutes);
 
 const BUSINESS_EMAIL = 'oceansunsetchalets@gmail.com'
 
