@@ -17,29 +17,23 @@ class Analytics {
   // Main async initialization sequence
   async init() {
     try {
-      console.log('Analytics initialization starting...');
-      
       // Step 1: Set up session first
       this.sessionId = await this._ensureSession();
-      console.log('Session established:', this.sessionId);
       
       // Step 2: Set up visit second
       this.visitId = await this._ensureVisit();
-      console.log('Visit established:', this.visitId);
       
       // Add a small delay to ensure database consistency
       await new Promise(resolve => setTimeout(resolve, 100));
       
       // Step 3: Track the page view
       await this._trackPageView();
-      console.log('Page view tracked successfully');
       
       // Mark as initialized
       this.isInitialized = true;
       
       // Process any actions that were waiting for initialization
       this._processPendingActions();
-      console.log('Analytics initialization complete');
     } catch (error) {
       console.error('Analytics initialization failed:', error);
       
@@ -99,13 +93,8 @@ class Analytics {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload)
         });
-        console.log('user_session insert response:')
-        const responseJson = await response.json();
-        console.log(responseJson)
-
         // Only set cookie after successful database operation
         setCookie('session_id', sessionId, 365); // 1 year
-        console.log('New session created:', sessionId);
       } catch (error) {
         console.error('Error creating session:', error);
       }
@@ -120,9 +109,6 @@ class Analytics {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
       });
-      const jsonResp = await response.json();
-      console.log(`user_session insert response:`) 
-      console.log(jsonResp)
     }
     return sessionId;
   }
@@ -131,7 +117,7 @@ class Analytics {
   async _ensureVisit() {
     const lastActivity = getCookie('last_activity');
     const currentTime = new Date().getTime();
-    const thirtyMinutes = 30 * 60 * 1000;
+    const thirtyMinutes = 30 * 60 * 1000; // TODO: move to constants file?
     
     // Check if we need a new visit
     const needNewVisit = !lastActivity || 
@@ -139,8 +125,6 @@ class Analytics {
     
     let visitId = getCookie('current_visit');
 
-    console.log(`needNewVisit boolean value: ${needNewVisit}`)
-    
     if (needNewVisit || !visitId) {
       visitId = generateUUID();
       
@@ -192,7 +176,6 @@ class Analytics {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload)
         });
-        console.log(`response: ${response}`)
         // Only set cookies if visit was successfully created
         setCookie('current_visit', visitId, 1); // 1 day
         setCookie('last_activity', new Date().toISOString(), 1);
@@ -209,8 +192,6 @@ class Analytics {
       })
 
       const {visitExists} = await response.json()
-      console.log(`visitExists value:`)
-      console.log(visitExists)
         
       if (!visitExists) {
         console.error('Existing visit ID not found in database:', visitId);
@@ -219,7 +200,6 @@ class Analytics {
         setCookie('current_visit', '', -1); // Expire the cookie
         return this._ensureVisit(); // Recursive call to create a new visit
       } else {
-        console.log(`updating last activity cookie within ensureVisit()`)
         // Update last activity time for valid visits
         setCookie('last_activity', new Date().toISOString(), 1);
       }
@@ -230,7 +210,6 @@ class Analytics {
   // STEP 3: Track a page view
   async _trackPageView() {
     // Ensure we have valid IDs before proceeding
-    console.log(`this.visitId: ${this.visitId}, this.sessionId: ${this.sessionId}`)
     if (!this.visitId || !this.sessionId) {
       console.error('Missing required IDs for page view tracking');
       return;
@@ -249,9 +228,6 @@ class Analytics {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
     });
-    const responseJson = await response.json()
-    console.log("create pageview response in _trackPageView:")
-    console.log(responseJson)
   }
   
   // Update page view with exit time and scroll depth

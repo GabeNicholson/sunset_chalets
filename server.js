@@ -74,8 +74,6 @@ app.post('/api/contact', (req, res) => {
             console.error('Error sending email:', error);
             return res.status(500).json({ success: false, message: 'Failed to send email' });
         }
-        
-        console.log('Email sent:', info.response);
         res.status(200).json({ success: true, message: 'Email sent successfully' });
     });
 });

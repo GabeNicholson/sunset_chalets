@@ -7,34 +7,26 @@ const supabase = createClient(process.env.DATABASE_URL, process.env.DATABASE_KEY
 
 router.post("/user_session", async (req, res) => {
     const payload = req.body;
-    console.log(`payload: ${payload}`);
     const { data, error } = await supabase.from('user_sessions').insert(payload);
-    console.log(`data: ${data}`)
-    console.log(`error: ${error}`)
     res.json({ success: true });
 })
 
 router.post("/update_user_session", async (req, res) => {
     const { session_id, ...updateData } = req.body;
-    console.log('Update session payload:', updateData);
     await supabase.from('user_sessions').update(updateData).eq('session_id', session_id);
     res.json({ success: true });
 })
 
 router.post("/create_sitevisit", async (req, res) => {
     const payload = req.body;
-    console.log(`payload: ${payload}`);
     ip_address = get_ip(req)
     payload['ip_address'] = ip_address
-    console.log(`page view payload: ${JSON.stringify(payload)}`);
     await supabase.from('site_visits').insert(payload);
     res.json({ success: true });
 })
 
 router.post("/create_pageview", async (req, res) => {
     const payload = req.body;
-    console.log("payload in create_pageview:")
-    console.log(payload)
     const { error } = await supabase.from('page_views').insert(payload)
     if (error) {
         console.error('Error tracking page view:', error);
@@ -48,8 +40,6 @@ router.post("/create_pageview", async (req, res) => {
 
 router.post("/update_pageview", async (req, res) => {
     const { page_view_id, ...updateData } = req.body;
-    console.log("updateData details:");
-    console.log(updateData); // Direct console.log of the object
     await supabase
         .from('page_views')
         .update(updateData)

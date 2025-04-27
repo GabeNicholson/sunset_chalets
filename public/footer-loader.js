@@ -15,5 +15,5 @@ document.addEventListener("DOMContentLoaded", () => {
                 document.body.insertAdjacentHTML('afterbegin', html);
             }
         })
-        .catch(error => console.log(`error loading footer: ${error}`))
+        .catch(error => console.error(`error loading footer: ${error}`))
 })
