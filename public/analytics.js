@@ -101,8 +101,10 @@ class Analytics {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload)
         });
-        // Only set cookie after successful database operation
-        setCookie('session_id', sessionId, SESSION_COOKIE_DAYS);
+        if (response.ok) {
+          // Only set cookie after successful database operation
+          setCookie('session_id', sessionId, SESSION_COOKIE_DAYS);
+        }
       } catch (error) {
         console.error('Error creating session:', error);
       }
