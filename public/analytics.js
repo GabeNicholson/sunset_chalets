@@ -132,7 +132,6 @@ class Analytics {
       // This ensures we don't set cookies for a visit that fails to be created
       try {
         const {twitterClickId, clickIdSource} = getTwclidInfo();
-        // console.log(`twitterClickId: ${twitterClickId}, clickIdSource: ${clickIdSource}`)
 
         // Get device info
         const deviceInfo = this._getDeviceInfo();
@@ -419,7 +418,7 @@ function getTwclidInfo() {
 
   // Twitter click ID handling
   const twitterClickId = urlParams.get('twclid');
-  const cookieTwitterClickId = getCookie('twclid');
+  const cookieTwitterClickId = getCookie('_twclid');
   
   let clickId = null;
   let clickIdSource = null;
