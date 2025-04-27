@@ -29,6 +29,8 @@ CREATE TABLE page_views (
   visit_id UUID REFERENCES site_visits(visit_id),
   page_url TEXT NOT NULL,
   view_timestamp TIMESTAMPTZ NOT NULL,
+  twitter_click_id TEXT,
+  twitter_click_id_source SMALLINT, -- 1 for URL, 2 for cookies
   exit_timestamp TIMESTAMPTZ,
   time_on_page INTEGER, -- in seconds
   scroll_depth_percentage INTEGER

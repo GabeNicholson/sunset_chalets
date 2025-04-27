@@ -131,25 +131,9 @@ class Analytics {
       // Create new visit in database BEFORE setting cookies
       // This ensures we don't set cookies for a visit that fails to be created
       try {
-        // Get URL parameters
-        const urlParams = new URLSearchParams(window.location.search);
-        
-        // Twitter click ID handling
-        const twitterClickId = urlParams.get('twclid');
-        const cookieTwitterClickId = getCookie('twclid');
-        
-        let clickId = null;
-        let clickIdSource = null;
-        
-        if (twitterClickId) {
-          clickId = twitterClickId;
-          clickIdSource = 1; // URL source
-          setCookie('twclid', twitterClickId, 30); // Store for 30 days
-        } else if (cookieTwitterClickId) {
-          clickId = cookieTwitterClickId;
-          clickIdSource = 2; // Cookie source
-        }
-        
+        const {twitterClickId, clickIdSource} = getTwclidInfo();
+        // console.log(`twitterClickId: ${twitterClickId}, clickIdSource: ${clickIdSource}`)
+
         // Get device info
         const deviceInfo = this._getDeviceInfo();
 
@@ -164,7 +148,7 @@ class Analytics {
           device_type: deviceInfo.deviceType,
           os: deviceInfo.os,
           os_version: deviceInfo.osVersion,
-          twitter_click_id: clickId,
+          twitter_click_id: twitterClickId,
           twitter_click_id_source: clickIdSource,
           referrer_url: document.referrer,
           screen_width: window.innerWidth,
@@ -214,13 +198,17 @@ class Analytics {
       console.error('Missing required IDs for page view tracking');
       return;
     }
+
+    const {twitterClickId, clickIdSource} = getTwclidInfo();
     
     // Create payload with all required fields
     const payload = {
       page_view_id: this.pageViewId,
       visit_id: this.visitId,
       page_url: window.location.href,
-      view_timestamp: new Date().toISOString()
+      view_timestamp: new Date().toISOString(),
+      twitter_click_id: twitterClickId,
+      twitter_click_id_source: clickIdSource
     };
 
     const response = await fetch('/api/analytics/create_pageview', {
@@ -423,6 +411,30 @@ function getCookie(name) {
     }
   }
   return null;
+}
+
+function getTwclidInfo() {
+  // Get URL parameters
+  const urlParams = new URLSearchParams(window.location.search);
+
+  // Twitter click ID handling
+  const twitterClickId = urlParams.get('twclid');
+  const cookieTwitterClickId = getCookie('twclid');
+  
+  let clickId = null;
+  let clickIdSource = null;
+  
+  if (twitterClickId) {
+    clickId = twitterClickId;
+    clickIdSource = 1; // URL source
+  } else if (cookieTwitterClickId) {
+    clickId = cookieTwitterClickId;
+    clickIdSource = 2; // Cookie source
+  }
+  return {
+    twitterClickId: clickId,
+    clickIdSource: clickIdSource
+  }
 }
 
 // Create and export singleton instance
