@@ -42,10 +42,15 @@ router.post("/create_pageview", async (req, res) => {
 
 router.post("/update_pageview", async (req, res) => {
     const { page_view_id, ...updateData } = req.body;
-    await supabase
+
+    const {error} = await supabase
         .from('page_views')
         .update(updateData)
         .eq('page_view_id', page_view_id);
+
+    if (error) {
+        console.error('Error updating page view:', error);
+    }
     res.json({ success: true });
 })
 

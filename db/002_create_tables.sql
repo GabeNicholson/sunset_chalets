@@ -25,7 +25,7 @@ CREATE TABLE site_visits (
 
 
 CREATE TABLE page_views (
-  id SERIAL PRIMARY KEY,
+  page_view_id SERIAL PRIMARY KEY,
   visit_id UUID REFERENCES site_visits(visit_id),
   page_url TEXT NOT NULL,
   view_timestamp TIMESTAMPTZ NOT NULL,
