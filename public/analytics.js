@@ -413,12 +413,22 @@ function getCookie(name) {
 }
 
 function getTwclidInfo() {
-  // Get URL parameters
   const urlParams = new URLSearchParams(window.location.search);
-
-  // Twitter click ID handling
   const twitterClickId = urlParams.get('twclid');
   const cookieTwitterClickId = getCookie('_twclid');
+  // Parse the cookie value if it's JSON
+  if (cookieTwitterClickId) {
+    try {
+      // Decode the URL-encoded string
+      const decodedValue = decodeURIComponent(cookieTwitterClickId);
+      // Parse the JSON
+      const parsedValue = JSON.parse(decodedValue);
+      // Extract just the twclid field
+      cookieTwitterClickId = parsedValue.twclid || null;
+    } catch (e) {
+      console.error('Error parsing twclid cookie:', e);
+    }
+  }
   
   let clickId = null;
   let clickIdSource = null;
