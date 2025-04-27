@@ -13,6 +13,7 @@ function initLightbox(imageSelector) {
             
             lightboxImage.src = img.src;
             lightboxImage.alt = img.alt;
+            lightboxImage.style.height = '100%'; // needed to see entire image
             lightboxTitle.textContent = title;
             lightbox.classList.add('active');
             
