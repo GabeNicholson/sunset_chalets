@@ -27,6 +27,8 @@ router.post("/create_sitevisit", async (req, res) => {
 
 router.post("/create_pageview", async (req, res) => {
     const payload = req.body;
+    ip_address = get_ip(req)
+    payload['ip_address'] = ip_address
     const { error } = await supabase.from('page_views').insert(payload)
     if (error) {
         console.error('Error tracking page view:', error);

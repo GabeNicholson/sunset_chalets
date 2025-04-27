@@ -25,7 +25,7 @@ CREATE TABLE site_visits (
 
 
 CREATE TABLE page_views (
-  page_view_id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  id SERIAL PRIMARY KEY,
   visit_id UUID REFERENCES site_visits(visit_id),
   page_url TEXT NOT NULL,
   view_timestamp TIMESTAMPTZ NOT NULL,
@@ -33,12 +33,13 @@ CREATE TABLE page_views (
   twitter_click_id_source SMALLINT, -- 1 for URL, 2 for cookies
   exit_timestamp TIMESTAMPTZ,
   time_on_page INTEGER, -- in seconds
-  scroll_depth_percentage INTEGER
+  scroll_depth_percentage INTEGER,
+  ip_address TEXT
 );
 
 
 CREATE TABLE book_now_actions (
-  action_id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  id SERIAL PRIMARY KEY,
   session_id UUID REFERENCES user_sessions(session_id),
   visit_id UUID REFERENCES site_visits(visit_id),
   action_timestamp TIMESTAMPTZ NOT NULL,
@@ -47,7 +48,7 @@ CREATE TABLE book_now_actions (
 
 
 CREATE TABLE contact_submissions (
-  submission_id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  id SERIAL PRIMARY KEY,
   session_id UUID REFERENCES user_sessions(session_id),
   visit_id UUID REFERENCES site_visits(visit_id),
   submission_timestamp TIMESTAMPTZ NOT NULL,
