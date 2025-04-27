@@ -102,7 +102,7 @@
   }
 
 /* iPad-specific adjustments - target screens between 768px and 1024px */
-@media (min-width: 768px) and (max-width: 1080px) {
+@media (min-width: 770px) and (max-width: 1080px) {
   /* Adjust the nav container to handle medium screens better */
   .nav-container {
     flex-wrap: nowrap;
