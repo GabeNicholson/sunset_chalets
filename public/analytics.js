@@ -118,26 +118,20 @@ class Analytics {
         body: JSON.stringify(payload)
       });
       if (!response.ok) {
-        const respJson = await response.json();
-        console.log(respJson)
-        if (respJson.error?.code === '23503') {
-          console.warn("session not found but in cookies, creating new one in database...")
-          const timestamp = new Date().toISOString();
-          const payload = {
-            session_id: sessionId,
-            first_seen_timestamp: timestamp,
-            last_seen_timestamp: timestamp
-          }
-          const response = await fetch('/api/analytics/user_session', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload)
-          });
-          if (response.ok) {
-            console.log("successfully added sessionId into db")
-          }
-        } else {
-          console.error("session id in cookie but error isnt handled...")
+        console.warn("session not found but in cookies, creating new one in database...")
+        const timestamp = new Date().toISOString();
+        const payload = {
+          session_id: sessionId,
+          first_seen_timestamp: timestamp,
+          last_seen_timestamp: timestamp
+        }
+        const response = await fetch('/api/analytics/user_session', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        if (response.ok) {
+          console.log("successfully added sessionId into db")
         }
       }
     }

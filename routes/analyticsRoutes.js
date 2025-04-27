@@ -17,10 +17,16 @@ router.post("/user_session", async (req, res) => {
 
 router.post("/update_user_session", async (req, res) => {
     const { session_id, ...updateData } = req.body;
-    const {error} = await supabase.from('user_sessions').update(updateData).eq('session_id', session_id);
+    const {data, error} = await supabase.from('user_sessions').update(updateData).eq('session_id', session_id).select();
     if (error) {
         console.error(error);
         return res.status(500).json({ success: false, error });
+    }
+    // If no rows matched, `data` will be an empty array
+    if (!data || data.length === 0) {
+    return res
+        .status(404)
+        .json({ success: false, message: 'session_id not found' });
     }
     res.json({ success: true });
 })
