@@ -374,7 +374,7 @@ class Analytics {
       let exitTracked = false;
       
       const trackExit = () => {
-        if (!exitTracked) {
+        if (!exitTracked && this.isInitialized && this.pageViewId) {
           exitTracked = true;
           this._updatePageView();
         }
@@ -386,7 +386,7 @@ class Analytics {
       
       // Track tab visibility changes
       document.addEventListener('visibilitychange', () => {
-        if (document.visibilityState === 'hidden') {
+        if (document.visibilityState === 'hidden' && this.pageViewId) {
           this._updatePageView();
         }
       });    
