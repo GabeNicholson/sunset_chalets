@@ -79,18 +79,6 @@ app.post('/api/contact', (req, res) => {
         res.status(200).json({ success: true, message: 'Email sent successfully' });
     });
 });
-  
-app.get('/api/analytics/client-info', (req, res) => {
-    const ip = req.headers['x-forwarded-for']?.split(',')[0]?.trim() || 
-                req.socket?.remoteAddress ||
-                null;
-    console.log('Client IP detected:', ip);
-
-    res.json({ 
-        ip: ip,
-        timestamp: new Date().toISOString()
-        });
-});
 
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);

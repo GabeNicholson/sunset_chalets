@@ -1,8 +1,9 @@
+require('dotenv').config();
+
 const { createClient } = require('@supabase/supabase-js');
 const express = require('express');
 const router = express.Router();
-
-const supabase = createClient('https://scwovajbhelvqmxztzdj.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNjd292YWpiaGVsdnFteHp0emRqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDUzNzM0NDcsImV4cCI6MjA2MDk0OTQ0N30.YAlG55-pUtHqWCQ33ovE477suFHMAqf3tB5wuh-NLK0');
+const supabase = createClient(process.env.DATABASE_URL, process.env.DATABASE_KEY);
 
 router.post("/user_session", async (req, res) => {
     const payload = req.body;
@@ -20,21 +21,51 @@ router.post("/update_user_session", async (req, res) => {
     res.json({ success: true });
 })
 
-router.post("/pageview", async (req, res) => {
+router.post("/create_sitevisit", async (req, res) => {
     const payload = req.body;
     console.log(`payload: ${payload}`);
+    ip_address = get_ip(req)
+    payload['ip_address'] = ip_address
+    console.log(`page view payload: ${JSON.stringify(payload)}`);
     await supabase.from('site_visits').insert(payload);
     res.json({ success: true });
 })
 
+router.post("/create_pageview", async (req, res) => {
+    const payload = req.body;
+    console.log("payload in create_pageview:")
+    console.log(payload)
+    const { error } = await supabase.from('page_views').insert(payload)
+    if (error) {
+        console.error('Error tracking page view:', error);
+        // If there's still a foreign key violation despite our checks
+        if (error.code === '23503' && error.message.includes('visit_id')) {
+            console.error('Foreign key violation despite visit verification - database inconsistency');
+        }
+    }
+    res.json({ success: !error }); 
+})
+
 router.post("/update_pageview", async (req, res) => {
     const { page_view_id, ...updateData } = req.body;
-    console.log(`updateData for update page view: ${updateData}`);
+    console.log("updateData details:");
+    console.log(updateData); // Direct console.log of the object
     await supabase
         .from('page_views')
         .update(updateData)
         .eq('page_view_id', page_view_id);
     res.json({ success: true });
+})
+
+router.post("/verify_sitevisit", async (req, res) => {
+    const { visitId } = req.body;
+    const { data, error } = await supabase
+        .from('site_visits')
+        .select('visit_id')
+        .eq('visit_id', visitId)
+        .maybeSingle();
+    const visitExists = !error && data
+    res.json({success: true, visitExists: visitExists})
 })
 
 
@@ -49,5 +80,13 @@ router.post("/track_book_now", async (req, res) => {
     await supabase.from('book_now_actions').insert(payload);
     res.json({ success: true });
 })
+
+
+function get_ip(req) {
+    const ip = req.headers['x-forwarded-for']?.split(',')[0]?.trim() || 
+    req.socket?.remoteAddress ||
+    null;
+    return ip
+}
 
 module.exports = router;

@@ -1,27 +1,21 @@
 // Improved navbar-loader.js
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('DOM loaded, fetching navbar...');
-    
     // Fetch the navbar template
     fetch('/navbar.html')
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
-            console.log('Navbar fetch successful');
             return response.text();
         })
         .then(html => {
-            console.log('Processing navbar HTML');
             // Insert the navbar at the beginning of the body
             const navbarPlaceholder = document.querySelector('#navbar-placeholder');
             if (navbarPlaceholder) {
                 navbarPlaceholder.innerHTML = html;
-                console.log('Navbar inserted into placeholder');
             } else {
                 // If no placeholder exists, insert at the beginning of body
                 document.body.insertAdjacentHTML('afterbegin', html);
-                console.log('Navbar inserted at beginning of body');
             }
             
             // Add active class to current page link
@@ -72,7 +66,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
         });
-        console.log('Current page highlighted in navbar');
     }
 });
 
