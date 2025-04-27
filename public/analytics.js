@@ -325,11 +325,15 @@ class Analytics {
   async trackBookNow() {
     return this._ensureInitialized(async () => {
       try {
+        const {twitterClickId, clickIdSource} = getTwclidInfo();
+
         const payload = {
           session_id: this.sessionId,
           visit_id: this.visitId,
           action_timestamp: new Date().toISOString(),
           page_url: window.location.href,
+          twitter_click_id: twitterClickId,
+          twitter_click_id_source: clickIdSource
         }
         await fetch('/api/analytics/track_book_now', {
           method: 'POST',
