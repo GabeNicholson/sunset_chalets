@@ -73,5 +73,5 @@ function redirect_to_checkout() {
     twq('event', 'tw-pjfnw-pkx6z', {
         conversion_id: null // use this to pass a unique ID for the conversion event for deduplication (e.g. order id '1a2b3c')
     });
-    return window.open("https://oceansunsetchalets.client.innroad.com/", "_blank");
+    return window.open("https://osc.lodgify.com/", "_blank");
 }
