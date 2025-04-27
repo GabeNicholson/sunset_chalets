@@ -12,6 +12,7 @@
     ],
     "routes": [
       { "src": "/api/contact", "dest": "/server.js" },
+      { "src": "/api/analytics/(.*)", "dest": "/server.js" },
       { "src": "/style.css", "dest": "/public/style.css" },
       { "src": "/assets/(.*)", "dest": "/public/assets/$1" },
       { "src": "/(.*)\\.js", "dest": "/public/$1.js" },
