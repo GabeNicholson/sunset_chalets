@@ -1,3 +1,12 @@
+import {
+  TWCLID_SOURCES,
+  THIRTY_MINUTES_MS,
+  SCROLL_THROTTLE_MS,
+  VISIT_COOKIE_DAYS,
+  ACTIVITY_COOKIE_DAYS,
+  SESSION_COOKIE_DAYS
+} from './constants.js';
+
 // Main Analytics class
 class Analytics {
   constructor() {
@@ -94,7 +103,7 @@ class Analytics {
           body: JSON.stringify(payload)
         });
         // Only set cookie after successful database operation
-        setCookie('session_id', sessionId, 365); // 1 year
+        setCookie('session_id', sessionId, SESSION_COOKIE_DAYS);
       } catch (error) {
         console.error('Error creating session:', error);
       }
@@ -117,11 +126,9 @@ class Analytics {
   async _ensureVisit() {
     const lastActivity = getCookie('last_activity');
     const currentTime = new Date().getTime();
-    const thirtyMinutes = 30 * 60 * 1000; // TODO: move to constants file?
-    
+    const pastTimeCutoff = (currentTime - new Date(lastActivity).getTime() > THIRTY_MINUTES_MS);
     // Check if we need a new visit
-    const needNewVisit = !lastActivity || 
-                        (currentTime - new Date(lastActivity).getTime() > thirtyMinutes);
+    const needNewVisit = !lastActivity || pastTimeCutoff;
     
     let visitId = getCookie('current_visit');
 
@@ -160,8 +167,8 @@ class Analytics {
           body: JSON.stringify(payload)
         });
         // Only set cookies if visit was successfully created
-        setCookie('current_visit', visitId, 1); // 1 day
-        setCookie('last_activity', new Date().toISOString(), 1);
+        setCookie('current_visit', visitId, VISIT_COOKIE_DAYS);
+        setCookie('last_activity', new Date().toISOString(), ACTIVITY_COOKIE_DAYS);
       } catch (error) {
         console.error('Error creating visit:', error);
         visitId = null;
@@ -181,10 +188,9 @@ class Analytics {
         // Clear the cookie and create a new visit
         visitId = null;
         setCookie('current_visit', '', -1); // Expire the cookie
-        return this._ensureVisit(); // Recursive call to create a new visit
       } else {
         // Update last activity time for valid visits
-        setCookie('last_activity', new Date().toISOString(), 1);
+        setCookie('last_activity', new Date().toISOString(), ACTIVITY_COOKIE_DAYS);
       }
     }
     return visitId;
@@ -361,7 +367,7 @@ class Analytics {
           if (scrollPercent > this.maxScrollDepth) {
             this.maxScrollDepth = scrollPercent;
           }
-        }, 100); // 100ms throttle
+        }, SCROLL_THROTTLE_MS);
       });
       
       // Track page exits with better handling
@@ -435,10 +441,10 @@ function getTwclidInfo() {
   
   if (twitterClickId) {
     clickId = twitterClickId;
-    clickIdSource = 1; // URL source
+    clickIdSource = TWCLID_SOURCES.URL; 
   } else if (cookieTwitterClickId) {
     clickId = cookieTwitterClickId;
-    clickIdSource = 2; // Cookie source
+    clickIdSource = TWCLID_SOURCES.COOKIE;
   }
   return {
     twitterClickId: clickId,
