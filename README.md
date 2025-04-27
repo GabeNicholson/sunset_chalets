@@ -53,10 +53,3 @@ Goal is to track user activity across the website using session_id as the primar
 The `site_visits` table creates a new site visit entry for a given session_id every 30 minutes (assuming the user returns to the website). This is to track different site visits a user might have. It is responsible for tracking twitter click id and other device/browser information. 
 
 `page_views` tracks whenever a user visits a page. It also logs twitter click id information and scroll information.
-
-
-Currently there are 5 tables with the following teardown and creation commands:
-
-```
-insert code here
-```
