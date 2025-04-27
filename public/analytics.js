@@ -118,7 +118,9 @@ class Analytics {
         body: JSON.stringify(payload)
       });
       if (!response.ok) {
-        if (json.error?.code === '23503') {
+        const respJson = await response.json();
+        console.log(respJson)
+        if (respJson.error?.code === '23503') {
           console.warn("session not found but in cookies, creating new one in database...")
           const timestamp = new Date().toISOString();
           const payload = {
@@ -205,7 +207,7 @@ class Analytics {
         
       if (!visitExists) {
         console.error('Existing visit ID not found in database:', visitId);
-        // Clear the cookie and create a new visit
+        // Clear the cookie
         visitId = null;
         setCookie('current_visit', '', -1); // Expire the cookie
       } else {
