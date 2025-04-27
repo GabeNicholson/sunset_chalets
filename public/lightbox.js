@@ -1,20 +1,11 @@
-// Make CTA button work like the main book now button
-document.getElementById('cta_book_btn').addEventListener('click', function() {
-    document.getElementById('book_now_btn').click();
-});
-
-// Lightbox functionality
-document.addEventListener('DOMContentLoaded', function() {
+function initLightbox(imageSelector) {
     const lightbox = document.getElementById('imageLightbox');
     const lightboxImage = document.getElementById('lightboxImage');
     const lightboxTitle = document.getElementById('lightboxTitle');
     const lightboxClose = document.getElementById('lightboxClose');
 
-    // Select all photo items AND the featured photo
-    const photoItems = document.querySelectorAll('.photo-item, .featured-photo');
-    
     // Open lightbox when clicking on a photo
-    photoItems.forEach(item => {
+    imageSelector.forEach(item => {
         item.addEventListener('click', function() {
             const img = this.querySelector('img');
             const titleElement = this.querySelector('.photo-title');
@@ -51,4 +42,17 @@ document.addEventListener('DOMContentLoaded', function() {
             document.body.style.overflow = 'auto';
         }
     });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    const currentPath = window.location.pathname
+    const pageConfig = {
+        '/': '.feature-card',
+        '/property': '.photo-item, .featured-photo'
+    }
+    const selector = pageConfig[currentPath]
+    const photoItems = document.querySelectorAll(selector)
+    if (photoItems) {
+        initLightbox(photoItems)
+    }
 });

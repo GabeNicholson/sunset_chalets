@@ -25,6 +25,15 @@
 <body>
     <div id="navbar-placeholder"></div>
 
+    <!-- Lightbox Container -->
+    <div class="lightbox" id="imageLightbox">
+        <span class="lightbox-close" id="lightboxClose">&times;</span>
+        <div class="lightbox-content">
+            <img id="lightboxImage" src="" alt="Expanded image">
+        </div>
+        <div class="lightbox-title" id="lightboxTitle"></div>
+    </div>
+
     <!-- Hero Section -->
     <section class="hero-section">
         <div class="hero-content">
@@ -120,6 +129,7 @@
     <div id="footer-placeholder"></div>
     <script src="script.js"></script>
     <script type="module" src="/analytics.js"></script>
+    <script src="lightbox.js"></script>
 </body>
 
 </html>
