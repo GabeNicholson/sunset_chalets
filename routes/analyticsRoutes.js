@@ -8,26 +8,38 @@ const supabase = createClient(process.env.DATABASE_URL, process.env.DATABASE_KEY
 router.post("/user_session", async (req, res) => {
     const payload = req.body;
     const { data, error } = await supabase.from('user_sessions').insert(payload);
-    res.json({ success: true });
+    if (error) {
+        console.error(error);
+        return res.status(500).json({ success: false, error });
+    }
+    res.json({ data: data, success: true });
 })
 
 router.post("/update_user_session", async (req, res) => {
     const { session_id, ...updateData } = req.body;
-    await supabase.from('user_sessions').update(updateData).eq('session_id', session_id);
+    const {error} = await supabase.from('user_sessions').update(updateData).eq('session_id', session_id);
+    if (error) {
+        console.error(error);
+        return res.status(500).json({ success: false, error });
+    }
     res.json({ success: true });
 })
 
 router.post("/create_sitevisit", async (req, res) => {
     const payload = req.body;
-    ip_address = get_ip(req)
+    const ip_address = get_ip(req)
     payload['ip_address'] = ip_address
-    await supabase.from('site_visits').insert(payload);
+    const {error} = await supabase.from('site_visits').insert(payload);
+    if (error) {
+        console.error(error);
+        return res.status(500).json({ success: false, error });
+    }
     res.json({ success: true });
 })
 
 router.post("/create_pageview", async (req, res) => {
     const payload = req.body;
-    ip_address = get_ip(req)
+    const ip_address = get_ip(req)
     payload['ip_address'] = ip_address
     const { error } = await supabase.from('page_views').insert(payload)
     if (error) {
@@ -42,14 +54,18 @@ router.post("/create_pageview", async (req, res) => {
 
 router.post("/update_pageview", async (req, res) => {
     const { page_view_id, ...updateData } = req.body;
-
-    const {error} = await supabase
+    const { error } = await supabase
         .from('page_views')
         .update(updateData)
         .eq('page_view_id', page_view_id);
 
     if (error) {
         console.error('Error updating page view:', error);
+        return res.status(500).json({ 
+            success: false,
+            message: error, 
+            error: { message: 'Database error during update', code: error.code }
+        });
     }
     res.json({ success: true });
 })

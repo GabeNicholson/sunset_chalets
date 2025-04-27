@@ -18,9 +18,6 @@ class Analytics {
     
     // Initialize with proper sequence
     this.init().catch(err => console.error('Analytics initialization error:', err));
-    
-    // Set up event listeners right away as they don't depend on initialization
-    this._setupEventListeners();
   }
   
   // Main async initialization sequence
@@ -40,6 +37,8 @@ class Analytics {
       
       // Mark as initialized
       this.isInitialized = true;
+
+      this._setupEventListeners();
       
       // Process any actions that were waiting for initialization
       this._processPendingActions();
@@ -239,11 +238,7 @@ class Analytics {
           time_on_page: timeOnPage,
           scroll_depth_percentage: this.maxScrollDepth
         }
-        const response = await fetch('/api/analytics/update_pageview', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        });
+        navigator.sendBeacon('/api/analytics/update_pageview', JSON.stringify(payload))
       }
     } catch (error) {
       console.error('Error updating page view:', error);
@@ -380,16 +375,17 @@ class Analytics {
         }
       };
       
-      // Use various events to track page exit
-      window.addEventListener('beforeunload', trackExit);
-      window.addEventListener('pagehide', trackExit);
       
       // Track tab visibility changes
       document.addEventListener('visibilitychange', () => {
-        if (document.visibilityState === 'hidden' && this.pageViewId) {
+        if (document.visibilityState === 'hidden' && this.isInitialized && this.pageViewId) {
           this._updatePageView();
         }
       });    
+
+      // Use various events to track page exit
+      window.addEventListener('beforeunload', trackExit);
+      window.addEventListener('pagehide', trackExit);
     }
 }
 
