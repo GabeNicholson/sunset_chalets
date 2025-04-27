@@ -257,7 +257,12 @@ class Analytics {
           time_on_page: timeOnPage,
           scroll_depth_percentage: this.maxScrollDepth
         }
-        navigator.sendBeacon('/api/analytics/update_pageview', JSON.stringify(payload))
+        // Create a Blob with the correct content type
+        const blob = new Blob([JSON.stringify(payload)], { 
+          type: 'application/json' 
+        });
+        // Use sendBeacon with the blob
+        navigator.sendBeacon('/api/analytics/update_pageview', blob);
       }
     } catch (error) {
       console.error('Error updating page view:', error);
@@ -384,7 +389,6 @@ class Analytics {
         }, SCROLL_THROTTLE_MS);
       });
       
-      // Track page exits with better handling
       let exitTracked = false;
       
       const trackExit = () => {
@@ -397,7 +401,8 @@ class Analytics {
       
       // Track tab visibility changes
       document.addEventListener('visibilitychange', () => {
-        if (document.visibilityState === 'hidden' && this.isInitialized && this.pageViewId) {
+        if (document.visibilityState === 'hidden' && !exitTracked && this.isInitialized && this.pageViewId) {
+          exitTracked = true;
           this._updatePageView();
         }
       });    
