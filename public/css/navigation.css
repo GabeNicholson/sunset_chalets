@@ -100,3 +100,44 @@
     transform: translateY(-2px);
     box-shadow: 0 5px 12px rgba(26, 95, 122, 0.3);
   }
+
+/* iPad-specific adjustments - target screens between 768px and 1024px */
+@media (min-width: 768px) and (max-width: 1080px) {
+  /* Adjust the nav container to handle medium screens better */
+  .nav-container {
+    flex-wrap: nowrap;
+  }
+  
+  /* Make nav links take up available space */
+  .nav-links {
+    flex: 1; /* Let nav links grow to fill available space */
+    justify-content: space-between; /* Distribute items evenly */
+    
+  }
+  
+  .nav-links a {
+    font-size: 0.75rem; /* Smaller font size */
+    padding: 0 2px; /* Reduce padding to bring links closer */
+  }
+  
+  /* Adjust the logo container */
+  .nav-logo {
+    flex: 0 0 auto; /* Don't grow, don't shrink, auto basis */
+    width: auto; /* Let it be only as wide as its content */
+    margin-right: 5px; /* Add some space after the logo */
+  }
+  .nav-logo span {
+    display: none;
+  }
+
+  /* Adjust the nav container */
+  .nav-container {
+    justify-content: flex-start; /* Start from the left instead of space-between */
+    padding: 0;
+  }
+  
+  /* Make sure the Book Now button stays at the right */
+  #book_now_btn {
+    margin-left: 20px;
+  }
+}
