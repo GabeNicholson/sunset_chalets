@@ -415,7 +415,7 @@ function getCookie(name) {
 function getTwclidInfo() {
   const urlParams = new URLSearchParams(window.location.search);
   const twitterClickId = urlParams.get('twclid');
-  const cookieTwitterClickId = getCookie('_twclid');
+  let cookieTwitterClickId = getCookie('_twclid');
   // Parse the cookie value if it's JSON
   if (cookieTwitterClickId) {
     try {
