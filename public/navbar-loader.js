@@ -1,4 +1,3 @@
-// Improved navbar-loader.js
 document.addEventListener('DOMContentLoaded', function() {
     // Fetch the navbar template
     fetch('/navbar.html')
@@ -69,9 +68,22 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
+function getCookie(name) {
+    const nameEQ = name + '=';
+    const ca = document.cookie.split(';');
+    for (let i = 0; i < ca.length; i++) {
+      let c = ca[i].trim();
+      if (c.indexOf(nameEQ) === 0) {
+        return c.substring(nameEQ.length, c.length);
+      }
+    }
+    return null;
+}
+
 function redirect_to_checkout() {
+    const sessionId = getCookie('session_id');
     twq('event', 'tw-pjfnw-pkx6z', {
-        conversion_id: null // use this to pass a unique ID for the conversion event for deduplication (e.g. order id '1a2b3c')
+        conversion_id: sessionId 
     });
     return window.open("https://osc.lodgify.com/", "_blank");
 }
